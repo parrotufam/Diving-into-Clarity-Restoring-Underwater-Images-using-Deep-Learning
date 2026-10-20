@@ -1,0 +1,13 @@
+# Python dependencies for UIEFT_BEST_PARAMS.ipynb and UIEFT_REGRESSION.ipynb
+numpy
+scipy
+pillow
+opencv-python-headless
+scikit-image
+scikit-learn
+matplotlib
+pandas
+tensorflow
+scikeras
+jupyter
+ipykernel
