@@ -15,16 +15,7 @@
 
 [**📄 Read the Paper**](https://doi.org/10.1007/s10846-024-02065-8) · [**🔬 Methodology**](#-proposed-method) · [**💻 Notebooks**](#-implementation-notebooks) · [**🧠 CNN Architecture**](#-cnn-architecture) · [**🚀 Getting Started**](#-getting-started) · [**📊 Results**](#-experimental-results) · [**📚 Citation**](#-citation)
 
-<br>
-
-<img src="https://github.com/lauramartinho/Diving-into-Clarity-Restoring-Underwater-Images-using-Deep-Learning/assets/65466643/a9b680ff-a9c7-458b-81ce-da6f8e2c3375" width="85%" alt="Original Figure 1 — examples of raw and restored underwater images in ocean and river environments">
-
-*Figure 1 of the publication. (a, b) Raw and restored ocean images; (c, d) raw and restored river images.*
-
-</div>
-
 ---
-
 ## 📖 About the Project
 
 This is the **official repository** for the paper **“Diving into Clarity: Restoring Underwater Images using Deep Learning”**, published in the *Journal of Intelligent & Robotic Systems* (2024). The project addresses the challenge of **enhancing the quality of underwater images using deep learning**.
