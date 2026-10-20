@@ -1,4 +1,4 @@
-<div align="center">
+<!-- <div align="center"> -->
 
 # 🌊 Diving into Clarity
 
@@ -13,80 +13,19 @@
 ![OpenCV](https://img.shields.io/badge/OpenCV-Image%20Processing-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
 [![AUID Dataset](https://img.shields.io/badge/Dataset-AUID%20%7C%20Amazon%20Underwater-228B73?style=flat-square&logo=googledrive&logoColor=white)](https://drive.google.com/drive/folders/1-fKpwApf9rQnS5iPR-Yew6ORYdWB1Lev?usp=sharing)
 
-[**📄 Read the Paper**](https://doi.org/10.1007/s10846-024-02065-8) · [**🔬 Methodology**](#-proposed-method) · [**💻 Notebooks**](#-implementation-notebooks) · [**🧠 CNN Architecture**](#-cnn-architecture) · [**🚀 Getting Started**](#-getting-started) · [**📊 Results**](#-experimental-results) · [**📚 Citation**](#-citation)
 
 ---
-## 📖 About the Project
+## About the Project
 
-This is the **official repository** for the paper **“Diving into Clarity: Restoring Underwater Images using Deep Learning”**, published in the *Journal of Intelligent & Robotic Systems* (2024). The project addresses the challenge of **enhancing the quality of underwater images using deep learning**.
-
-Underwater imagery is affected by **water absorption, scattering, turbidity, low visibility, color distortion, and nonuniform illumination**. Our approach combines a **Convolutional Neural Network (CNN) regression model**, which learns the optimal enhancement parameters from underwater images, with **intensity transformation techniques** applied to the raw inputs.
+This is the **official repository** for the paper **“Diving into Clarity: Restoring Underwater Images using Deep Learning”**, published in the *Journal of Intelligent & Robotic Systems* (2024). The project addresses the challenge of **enhancing the quality of underwater images using deep learning**. Underwater imagery is affected by **water absorption, scattering, turbidity, low visibility, color distortion, and nonuniform illumination**. Our approach combines a **Convolutional Neural Network (CNN) regression model**, which learns the optimal enhancement parameters from underwater images, with **intensity transformation techniques** applied to the raw inputs.
 
 Instead of using the same fixed parameters for every scene, the network learns image-specific values for **color correction, gamma correction, and image fusion**. The restoration process additionally employs contrast enhancement, histogram processing, unsharp masking, and brightness adjustment to recover underwater visual information.
 
 The method was evaluated with two established ocean-image datasets (**U45** and **UIEB**) and **AUID**, a dataset introduced in this research containing **276 images acquired in the Urubu River, in the Amazon region of Brazil**.
 
-📄 **Journal article:** [Diving into Clarity: Restoring Underwater Images using Deep Learning — Springer](https://link.springer.com/article/10.1007/s10846-024-02065-8) · [DOI](https://doi.org/10.1007/s10846-024-02065-8)
-
-🌿 **AUID dataset:** [Access the original Google Drive dataset](https://drive.google.com/drive/folders/1-fKpwApf9rQnS5iPR-Yew6ORYdWB1Lev?usp=sharing)
-
-### ✨ Main Contributions
-
-- **Adaptive parameter prediction** — A regression CNN estimates enhancement parameters from each underwater image instead of relying on a single manually selected configuration.
-- **Hybrid restoration pipeline** — Learning-based estimation is combined with color correction, gamma adjustment, sharpening, CLAHE, image fusion, and brightness/contrast transformations.
-- **Evaluation in distinct water conditions** — Experiments include both ocean scenes and challenging Amazon blackwater river environments.
-- **Amazon Underwater Image Dataset (AUID)** — The publication introduces a collection of 276 underwater images characterized by turbidity, scattering, and low visibility.
-
-**Publication:** Laura A. Martinho, João M. B. Cavalcanti, José L. S. Pio, and Felipe G. Oliveira. *Diving into Clarity: Restoring Underwater Images using Deep Learning*. **Journal of Intelligent & Robotic Systems**, 110, Article 32 (2024). [https://doi.org/10.1007/s10846-024-02065-8](https://doi.org/10.1007/s10846-024-02065-8)
-
 ---
+The objective is to recover visibility and meaningful scene details while adapting the processing to the characteristics of each input image.
 
-## 🔬 Proposed Method
-
-The proposed framework follows two complementary stages:
-
-1. **Learning-based Parameters Estimation:** a CNN regressor learns the relationship between underwater visual characteristics and appropriate enhancement parameters.
-2. **Intensity Transformation Fusion:** the learned parameters control a sequence of image-processing operations used to restore contrast, colors, brightness, and visual details.
-
-<div align="center">
-  <img src="assets/methodology.png" width="100%" alt="Learning-based parameter estimation followed by intensity transformation fusion">
-  <br>
-  <sub><b>Figure 1.</b> General methodology: underwater input image → parameter estimation → intensity transformation fusion → restored output. Figure from the article.</sub>
-</div>
-
-### 1️⃣ Learning-based Parameters Estimation
-
-A training dataset is built by associating underwater images with suitable parameter combinations. These combinations are identified by evaluating the output of the restoration operations under different enhancement settings.
-
-The CNN is trained as a **multi-output regression model**, learning a mapping from an underwater image to a vector of four enhancement parameters:
-
-$$
-P = f_{\theta}(I) = [\mathrm{cci},\;\gamma,\;\alpha,\;\beta]
-$$
-
-where:
-
-| Parameter | Role in the enhancement pipeline |
-| :--- | :--- |
-| **`cci`** | Controls the intensity of color correction. |
-| **`γ` (gamma)** | Controls nonlinear intensity/gamma correction. |
-| **`α` (alpha)** | Controls the weight of the first processed image in the blending/fusion operation. |
-| **`β` (beta)** | Controls the weight of the second processed image in the blending/fusion operation. |
-
-Here, `I` denotes the input underwater image and `fθ` the CNN regressor. The paper additionally discusses brightness and contrast adjustment within the final image-transformation stage.
-
-### 2️⃣ Intensity Transformation Fusion
-
-The predicted parameters are supplied to a restoration pipeline combining several image-processing operations:
-
-| Operation | Purpose |
-| :--- | :--- |
-| **Color correction** | Adjusts the distribution of values across color channels to reduce underwater color degradation. |
-| **Gamma correction** | Performs nonlinear intensity adjustment to improve image appearance. |
-| **Unsharp masking** | Emphasizes edges and fine visual details. |
-| **CLAHE** | Locally enhances contrast through contrast-limited adaptive histogram equalization. |
-| **Image fusion** | Combines processed image representations through weighted blending. |
-| **Brightness and contrast adjustment** | Refines the final restored image. |
 
 <div align="center">
   <img src="assets/restoration-stages.jpg" width="100%" alt="Illustrative underwater image enhancement stages: original, color correction, gamma, sharpening, CLAHE and restored image">
@@ -94,11 +33,8 @@ The predicted parameters are supplied to a restoration pipeline combining severa
   <sub><b>Figure 2.</b> Illustration of processing stages using the original image assets from the paper.</sub>
 </div>
 
-The objective is to recover visibility and meaningful scene details while adapting the processing to the characteristics of each input image.
 
----
-
-### 🔁 End-to-End Workflow
+### End-to-End Workflow
 
 The two accompanying notebooks represent the main stages of the approach:
 
@@ -126,50 +62,9 @@ The two accompanying notebooks represent the main stages of the approach:
                      ▼
             Restored underwater image
 ```
-
-## 🧠 CNN Architecture
-
-A convolutional neural network is used to predict the **four enhancement parameters**. The network receives a **64 × 64 RGB image** and progressively extracts visual features through convolutional blocks, followed by fully connected regression layers.
-
-<div align="center">
-  <img src="assets/cnn-architecture.png" width="850" alt="CNN architecture with three convolutional blocks and dense regression layers">
-  <br>
-  <sub><b>Figure 3.</b> Proposed CNN architecture, reproduced from Figure 3 of the published article.</sub>
-</div>
-
-### Network Specification
-
-| Stage | Configuration |
-| :--- | :--- |
-| **Input** | `64 × 64 × 3` RGB image |
-| **Convolutional block 1** | 64 filters, `3 × 3` kernel, ReLU, batch normalization, `2 × 2` max pooling |
-| **Convolutional block 2** | 128 filters, `3 × 3` kernel, ReLU, batch normalization, `2 × 2` max pooling |
-| **Convolutional block 3** | 128 filters, `3 × 3` kernel, ReLU, batch normalization, `2 × 2` max pooling |
-| **Flatten** | Transforms extracted feature maps into a feature vector |
-| **Fully connected layer 1** | 128 neurons, ReLU, dropout (`0.5`) |
-| **Fully connected layer 2** | 64 neurons, ReLU, dropout (`0.5`) |
-| **Output** | 4 continuous regression values: `cci`, `gamma`, `alpha`, `beta` |
-
-### Training Configuration
-
-The training procedure described in the paper uses the following settings:
-
-| Hyperparameter | Value |
-| :--- | :--- |
-| **Task** | Multi-output regression |
-| **Loss function** | Mean Squared Error (MSE) |
-| **Optimizer** | Adam |
-| **Learning rate** | `0.001` |
-| **Epochs** | `50` |
-| **Batch size** | `128` |
-| **Input resolution** | `64 × 64` |
-| **Output dimensionality** | `4` |
-
-Batch normalization and dropout are used to support stable training and reduce overfitting.
-
 ---
 
-## 🌍 Evaluation Datasets
+## Evaluation Datasets
 
 The framework was assessed in diverse underwater conditions, from natural ocean scenes to highly turbid Amazon river water.
 
@@ -222,11 +117,11 @@ Diving-into-Clarity/
     └── auid-benchmark.jpg
 ```
 
-## 💻 Implementation Notebooks
+## Implementation Notebooks
 
 The implementation is organized into **two complementary Jupyter notebooks**, following the workflow described in the paper.
 
-### 🧪 `UIEFT_BEST_PARAMS.ipynb` — Enhancement and Optimal Parameter Search
+### `UIEFT_BEST_PARAMS.ipynb` — Enhancement and Optimal Parameter Search
 
 This notebook implements the image-restoration operations and searches candidate combinations of enhancement parameters for underwater images. It is used to create labeled examples for supervised CNN regression.
 
@@ -240,7 +135,7 @@ This notebook implements the image-restoration operations and searches candidate
 
 **Key functions:** `UWE()`, `colorCorrection()`, `gammaCorrection()`, `mascaraNitidez()`, `CLAHE()`, `add()`, `enhacement()`, `getUCIQE()`, `getUIQM()`, and `maior_valor()`.
 
-### 🧠 `UIEFT_REGRESSION.ipynb` — CNN Parameter Estimation
+### `UIEFT_REGRESSION.ipynb` — CNN Parameter Estimation
 
 This notebook implements the **CNN regression model** used to estimate image-specific restoration parameters. It trains on image/parameter pairs and uses the predictions to enhance previously unseen underwater images.
 
@@ -257,7 +152,7 @@ This notebook implements the **CNN regression model** used to estimate image-spe
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 The notebooks are organized for **Google Colab with Google Drive datasets**, which is the recommended way to execute the implementation. They can also be adapted for local Jupyter execution.
 
@@ -433,7 +328,7 @@ cv2.imwrite('/content/drive/MyDrive/UWE/restored_example.png', restored)
 
 The test-set evaluation section also provides before/after visualization, predicted-versus-target parameters, and batch metric reporting.
 
-### 🖥️ Running Locally (Jupyter)
+### Running Locally (Jupyter)
 
 Start Jupyter after installing `requirements.txt`, open **`UIEFT_BEST_PARAMS.ipynb`** or **`UIEFT_REGRESSION.ipynb`**, and replace `/content/drive/MyDrive/...` with valid local paths. Colab-only imports such as `google.colab.patches.cv2_imshow` can be replaced with a local notebook display function:
 
@@ -448,7 +343,7 @@ def show_bgr(image):
 # show_bgr(restored)
 ```
 
-### 📌 Input and Output Summary
+### Input and Output Summary
 
 | Stage | Input | Output |
 | :--- | :--- | :--- |
@@ -459,7 +354,7 @@ def show_bgr(image):
 
 ---
 
-## 🖼️ Restoration Examples
+## Restoration Examples
 
 <div align="center">
   <img src="assets/restoration-gallery.jpg" width="100%" alt="Before and after underwater restoration examples from the original publication">
@@ -469,52 +364,7 @@ def show_bgr(image):
 
 ---
 
-## 📊 Experimental Results
-
-The paper reports qualitative and quantitative evaluation across **U45, UIEB, and AUID**, comparing the proposed technique against established restoration methods including **VRE, UDCP, IBLA, CBF, GDCP, UWCNN, WaterNet, and LI**.
-
-### Quantitative Results
-
-The following **PSNR** and **SSIM** results are reported in the publication for U45 and UIEB:
-
-| Dataset | Metric | Best comparison result | **Diving into Clarity** |
-| :--- | :--- | ---: | ---: |
-| **U45** | PSNR ↑ | 26.879 | **26.967** |
-| **U45** | SSIM ↑ | 0.831 | **0.847** |
-| **UIEB** | PSNR ↑ | 27.157 | **27.299** |
-| **UIEB** | SSIM ↑ | 0.788 | **0.793** |
-
-*Higher values are better for both PSNR and SSIM. The comparison values above refer to the best scores among the evaluated comparison techniques, as reported in the article.*
-
-### Qualitative Comparison — AUID
-
-<div align="center">
-  <img src="assets/auid-benchmark.jpg" width="100%" alt="Qualitative comparison on AUID between raw, HE, UDCP, IBLA, WaterNet and the proposed approach">
-  <br>
-  <sub><b>Figure 6.</b> Qualitative results on a challenging AUID scene; comparison images from the publication.</sub>
-</div>
-
-Experiments on **AUID** show the behavior of enhancement techniques in low-visibility, turbid river scenes. In the qualitative discussion, the paper highlights the challenge of restoring scene structure and contrast under Amazon blackwater conditions.
-
-### Evaluation Metrics
-
-The paper considers several complementary image-quality measurements:
-
-| Metric | Full name / interpretation |
-| :--- | :--- |
-| **UIQM** | Underwater Image Quality Measure: combines colorfulness, sharpness, and contrast. |
-| **UISM** | Underwater Image Sharpness Measure. |
-| **UICM** | Underwater Image Colorfulness Measure. |
-| **UICONM** | Underwater Image Contrast Measure. |
-| **PSNR** | Peak Signal-to-Noise Ratio: signal fidelity relative to a reference. |
-| **SSIM** | Structural Similarity Index: structural agreement with a reference. |
-| **Entropy** | Measure of image information distribution and texture complexity. |
-
-The combination of **visual comparisons** and **multiple quality metrics** enables analysis beyond a single numerical score.
-
----
-
-## 🛠️ Technologies
+## Technologies
 
 | Technology | Use |
 | :--- | :--- |
@@ -531,15 +381,15 @@ The combination of **visual comparisons** and **multiple quality metrics** enabl
 
 ---
 
-## 🌐 Applications
+## Applications
 
 The restoration framework is relevant to underwater computer vision and robotics research, including:
 
-- 🤖 **Underwater robotics and navigation** — clearer visual input for autonomous or remotely operated systems.
-- 🔎 **Inspection and monitoring** — improved visibility in low-contrast aquatic scenes.
-- 🐟 **Marine and river ecology** — support for visual observation of underwater habitats and organisms.
-- 🛟 **Search and rescue** — enhancement of imagery acquired under adverse underwater visibility.
-- 🧪 **Image enhancement research** — evaluation of adaptive parameter estimation and hybrid restoration pipelines.
+- **Underwater robotics and navigation** — clearer visual input for autonomous or remotely operated systems.
+- **Inspection and monitoring** — improved visibility in low-contrast aquatic scenes.
+- **Marine and river ecology** — support for visual observation of underwater habitats and organisms.
+- **Search and rescue** — enhancement of imagery acquired under adverse underwater visibility.
+- **Image enhancement research** — evaluation of adaptive parameter estimation and hybrid restoration pipelines.
 
 ---
 
@@ -562,23 +412,3 @@ If you use this implementation, the proposed method, or the AUID dataset in acad
 
 **Paper:** [*Diving into Clarity: Restoring Underwater Images using Deep Learning*](https://doi.org/10.1007/s10846-024-02065-8) — *Journal of Intelligent & Robotic Systems* (2024).
 
----
-
-## 👩‍🔬 Authors
-
-- **Laura A. Martinho**
-- **João M. B. Cavalcanti**
-- **José L. S. Pio**
-- **Felipe G. Oliveira**
-
-**Affiliation:** Institute of Computing (ICOMP), Universidade Federal do Amazonas (UFAM), Manaus, Brazil. The publication also lists the Institute of Exact Sciences and Technology (ICET), UFAM, Itacoatiara, Brazil, for Felipe G. Oliveira.
-
-<div align="center">
-
----
-
-**🌊 Diving into Clarity — Adaptive underwater image restoration through deep learning and image processing.**
-
-[**📄 Publication**](https://doi.org/10.1007/s10846-024-02065-8) · **UFAM · Computer Vision · Underwater Imaging**
-
-</div>
